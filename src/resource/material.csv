@@ -1,0 +1,17 @@
+#Name, isMeet
+#Example:
+#Fish, true
+#
+
+Salmon, true
+pork, true
+pork_rib, true
+pork_bone, true
+prawn, true
+beef, true
+seabass, true
+chicken_breast, true
+chicken_wing, true
+chicken_leg, true
+sliced_fish, true
+prawn_paste, true

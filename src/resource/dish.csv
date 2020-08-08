@@ -1,0 +1,50 @@
+#Name: Material1, Material2, ....
+#Example:
+#Fried Egg: eggs
+#Pork Lotus Soup: pork rib, lotus, water
+
+#Soup
+pork lotus soup: pork_rib, lotus
+Pumpkin soup: pumpkin, milk
+tomato egg soup: tomato, egg
+beef white radish soup: beef, white radish
+pork black fungi soup: pork_rib, black_fungi
+pork bone soup: pork_bone
+fish toufu soup: seabass, toufu
+sliced fish soup: sliced_fish
+cabbage prawn soup: cabbage, prawn_paste
+tomato corn soup: tomato, corn
+beef tomato potato soup: beef, tomato, potato
+luffa soup: luffa
+pork chinese yam soup: pork_rib, chinese_yam
+
+#non soup meet dish
+fried beef with onion: beef, onion
+fried seabass: seabass
+fried pork with onion: pork, onion
+fried chichen wings: chicken_wing
+fried chicken leg: chicken_leg
+fried prawn: prawn
+steam chicken breast: chicken_breast
+steam sliced fish: sliced_fish
+steam seabass: seabass
+
+
+
+
+
+#non soup veg dish
+fried pumpkin: pumpkin
+fried tomato egg: tomato, egg
+fried potato: potato
+fried cabbage: cabbage
+fried luffa: luffa
+fried chinese yam: chinese_yam
+fried eggplant: eggplant
+fried eggplant with minced pork: eggplant, minced_pork
+fried dry toufu: dried_toufu
+steam sweet potato: sweet_potato
+steam pumpkin: pumpkin
+steam egg: egg
+steam egg with minced pork: egg, minced_pork
+
