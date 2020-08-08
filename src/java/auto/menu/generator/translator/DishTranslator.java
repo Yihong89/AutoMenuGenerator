@@ -13,7 +13,6 @@ public class DishTranslator implements Translator<Dish> {
     }
 
 
-    @Override
     public Dish parse(String lines) {
         String[] records = lines.split(": ");
         if(records.length == 2) {
@@ -32,7 +31,6 @@ public class DishTranslator implements Translator<Dish> {
         }
     }
 
-    @Override
     public String toTxt(Dish dish) {
         return null;
     }

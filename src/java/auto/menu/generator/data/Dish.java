@@ -15,7 +15,7 @@ public class Dish {
 
     public Dish(String name) {
         this.name = name;
-        this.materials = new HashSet<>();
+        this.materials = new HashSet();
     }
 
     public boolean containMeet() {

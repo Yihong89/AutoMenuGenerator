@@ -22,7 +22,7 @@ public class TxtReader<T> {
 
 
     public Set<T> read() throws IOException {
-        Set<T> newSet = new HashSet<>();
+        Set<T> newSet = new HashSet();
         BufferedReader in = new BufferedReader(new FileReader(this.getClass().getClassLoader().getResource(name).getPath()));
         String line;
         while((line = in.readLine()) != null)

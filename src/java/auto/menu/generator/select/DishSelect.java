@@ -9,7 +9,7 @@ import java.util.*;
 public class DishSelect implements Select {
 
     private LoadedData data;
-    private Set<Material> todayMaterials = new HashSet<>();
+    private Set<Material> todayMaterials = new HashSet();
     private static final Random generator = new Random();
 
 
@@ -23,13 +23,12 @@ public class DishSelect implements Select {
         }
     }
 
-    @Override
     public Set<Dish> selectDishes(int numSoup, int numMeet, int numVeg) {
-        List<Dish> soupDishes = new ArrayList<>();
-        List<Dish> nonSoupMeetDish = new ArrayList<>();
-        List<Dish> nonSoupVegDish = new ArrayList<>();
+        List<Dish> soupDishes = new ArrayList();
+        List<Dish> nonSoupMeetDish = new ArrayList();
+        List<Dish> nonSoupVegDish = new ArrayList();
 
-        Set<Dish> dishes = new HashSet<>();
+        Set<Dish> dishes = new HashSet();
 
         System.out.println("\nReccommand Dish based on today's material");
         for(Dish dish : data.getDishes()){

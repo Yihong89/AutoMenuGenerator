@@ -3,15 +3,15 @@ package auto.menu.generator.data;
 import java.util.*;
 
 public class LoadedData {
-    Map<String, Material> materials = new HashMap<>();
-    Map<String, Dish> dishes = new HashMap<>();
+    Map<String, Material> materials = new HashMap();
+    Map<String, Dish> dishes = new HashMap();
 
     public void registerMaterial(Material material) {
-        materials.putIfAbsent(material.getName(), material);
+        materials.put(material.getName(), material);
     }
 
     public void registerDish(Dish dish){
-        dishes.putIfAbsent(dish.getName(), dish);
+        dishes.put(dish.getName(), dish);
     }
 
     public void deregisterDish(String dish){

@@ -4,7 +4,6 @@ import auto.menu.generator.data.Material;
 
 public class MaterialTranslator implements Translator<Material> {
 
-    @Override
     public Material parse(String lines) {
         String[] records = lines.split(", ");
         if(records.length == 2) {
@@ -14,7 +13,6 @@ public class MaterialTranslator implements Translator<Material> {
         }
     }
 
-    @Override
     public String toTxt(Material material) {
         return null;
     }

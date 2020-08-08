@@ -24,23 +24,23 @@ public class Start {
         Translator<Dish> dishTranslator = new DishTranslator(data);
         Translator<String> simpleTranslator = new SimpleTranslator();
 
-        TxtReader<Material> txtReader = new TxtReader<>("material.csv", materialTranslator);
-        TxtReader<Dish> dishTxtReader = new TxtReader<>("dish.csv", dishTranslator);
+        TxtReader<Material> txtReader = new TxtReader("material.csv", materialTranslator);
+        TxtReader<Dish> dishTxtReader = new TxtReader("dish.csv", dishTranslator);
 
         data.registerMaterial(txtReader.read());
         data.registerDish(dishTxtReader.read());
 
-        TxtReader<String> ydishTxtReader = new TxtReader<>("yesterday-dish.txt", simpleTranslator);
+        TxtReader<String> ydishTxtReader = new TxtReader("yesterday-dish.txt", simpleTranslator);
         data.deregisterDish(ydishTxtReader.read());
 
 
-        TxtReader<String> tMaterialTxtReader = new TxtReader<>("today-material.txt", simpleTranslator);
+        TxtReader<String> tMaterialTxtReader = new TxtReader("today-material.txt", simpleTranslator);
 
-        Set<String> todayMaterials = new HashSet<>(tMaterialTxtReader.read());
+        Set<String> todayMaterials = new HashSet(tMaterialTxtReader.read());
 
         Select select = new DishSelect(data, todayMaterials);
 
-        Set<Dish> selectedDish = select.selectDishes(2, 2, 6 );
+        Set<Dish> selectedDish = select.selectDishes(1, 1, 3 );
         System.out.println("\n >>>> Random pick results :");
         StringBuilder sb = new StringBuilder();
         for(Dish dish : selectedDish){
