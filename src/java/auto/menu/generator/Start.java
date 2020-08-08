@@ -3,6 +3,7 @@ package auto.menu.generator;
 import auto.menu.generator.data.Dish;
 import auto.menu.generator.data.LoadedData;
 import auto.menu.generator.data.Material;
+import auto.menu.generator.email.SendEmail;
 import auto.menu.generator.io.TxtReader;
 import auto.menu.generator.select.DishSelect;
 import auto.menu.generator.select.Select;
@@ -52,6 +53,9 @@ public class Start {
         }
         System.out.println("\n >>>>>Material List");
         System.out.println(sb.toString());
+
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.send("subject", sb.toString());
     }
 
 
