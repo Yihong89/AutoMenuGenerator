@@ -1,8 +1,8 @@
 package auto.menu.generator;
 
 import auto.menu.generator.data.Dish;
-import auto.menu.generator.data.LoadedData;
 import auto.menu.generator.data.Material;
+import auto.menu.generator.email.HtmlGenerator;
 import auto.menu.generator.email.SendEmail;
 import auto.menu.generator.io.TxtReader;
 import auto.menu.generator.select.DishSelect;
@@ -13,6 +13,8 @@ import auto.menu.generator.translator.SimpleTranslator;
 import auto.menu.generator.translator.Translator;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,10 +22,11 @@ public class Start {
 
     public static void main(String arg[]) throws IOException {
 
-        LoadedData data = new LoadedData();
+        StaticDataDomain data = new StaticDataDomain();
         Translator<Material> materialTranslator = new MaterialTranslator();
         Translator<Dish> dishTranslator = new DishTranslator(data);
         Translator<String> simpleTranslator = new SimpleTranslator();
+        HtmlGenerator htmlGenerator = new HtmlGenerator();
 
         TxtReader<Material> txtReader = new TxtReader("material.csv", materialTranslator);
         TxtReader<Dish> dishTxtReader = new TxtReader("dish.csv", dishTranslator);
@@ -32,30 +35,37 @@ public class Start {
         data.registerDish(dishTxtReader.read());
 
         TxtReader<String> ydishTxtReader = new TxtReader("yesterday-dish.txt", simpleTranslator);
-        data.deregisterDish(ydishTxtReader.read());
+        htmlGenerator.addHeadContent("Yesterday menu");
+        Set<String> ydish = ydishTxtReader.read();
+        htmlGenerator.addContent(ydish.toString());
+        data.deregisterDish(ydish);
 
 
         TxtReader<String> tMaterialTxtReader = new TxtReader("today-material.txt", simpleTranslator);
 
         Set<String> todayMaterials = new HashSet(tMaterialTxtReader.read());
 
-        Select select = new DishSelect(data, todayMaterials);
+        Select select = new DishSelect(data, todayMaterials, htmlGenerator);
 
-        Set<Dish> selectedDish = select.selectDishes(1, 1, 3 );
-        System.out.println("\n >>>> Random pick results :");
+        Set<Dish> selectedDish = select.selectDishes(3, 3, 9 );
+        htmlGenerator.addHeadContent("Random pick results");
         StringBuilder sb = new StringBuilder();
         for(Dish dish : selectedDish){
-            System.out.println(dish.getName());
+            htmlGenerator.addContent("<b>"+dish.getName()+"</b>");
+            sb.append("<p>");
             sb.append(dish.getName());
             sb.append(": ");
-            sb.append(dish.getMaterials());
-            sb.append("\n");
+            sb.append(dish.getMaterialNames());
+            sb.append("</p>");
         }
-        System.out.println("\n >>>>>Material List");
-        System.out.println(sb.toString());
+        htmlGenerator.addHeadContent("Material List");
+        htmlGenerator.addHtmlContent(sb.toString());
 
         SendEmail sendEmail = new SendEmail();
-        sendEmail.send("subject", sb.toString());
+        Date today = new Date();
+        DateFormat formatter = DateFormat.getDateTimeInstance();
+
+        sendEmail.send("Suggest Menu of " + formatter.format(today), htmlGenerator.getContent());
     }
 
 

@@ -1,14 +1,14 @@
 package auto.menu.generator.translator;
 
 import auto.menu.generator.data.Dish;
-import auto.menu.generator.data.LoadedData;
+import auto.menu.generator.StaticDataDomain;
 import auto.menu.generator.data.Material;
 
 public class DishTranslator implements Translator<Dish> {
 
-    private LoadedData data;
+    private StaticDataDomain data;
 
-    public DishTranslator(LoadedData data) {
+    public DishTranslator(StaticDataDomain data) {
         this.data = data;
     }
 
@@ -20,7 +20,6 @@ public class DishTranslator implements Translator<Dish> {
             String[] materialNames = records[1].split(", ");
             for(String name : materialNames){
                 if(!data.containsMaterial(name)){
-//                    System.out.println(name + " is not registered, registered as non-meet material");
                     data.registerMaterial(new Material(name, false));
                 }
                 dish.addMaterial(data.getMaterialByName(name));

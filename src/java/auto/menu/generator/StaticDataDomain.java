@@ -1,8 +1,11 @@
-package auto.menu.generator.data;
+package auto.menu.generator;
+
+import auto.menu.generator.data.Dish;
+import auto.menu.generator.data.Material;
 
 import java.util.*;
 
-public class LoadedData {
+public class StaticDataDomain {
     Map<String, Material> materials = new HashMap();
     Map<String, Dish> dishes = new HashMap();
 

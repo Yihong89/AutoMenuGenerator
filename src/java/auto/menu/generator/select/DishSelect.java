@@ -1,20 +1,23 @@
 package auto.menu.generator.select;
 
 import auto.menu.generator.data.Dish;
-import auto.menu.generator.data.LoadedData;
+import auto.menu.generator.StaticDataDomain;
 import auto.menu.generator.data.Material;
+import auto.menu.generator.email.HtmlGenerator;
 
 import java.util.*;
 
 public class DishSelect implements Select {
 
-    private LoadedData data;
+    private StaticDataDomain data;
     private Set<Material> todayMaterials = new HashSet();
     private static final Random generator = new Random();
+    private HtmlGenerator htmlGenerator;
 
 
-    public DishSelect(LoadedData data, Set<String> todayMaterials) {
+    public DishSelect(StaticDataDomain data, Set<String> todayMaterials, HtmlGenerator htmlGenerator) {
         this.data = data;
+        this.htmlGenerator = htmlGenerator;
         for(String name : todayMaterials) {
             Material material = data.getMaterialByName(name);
             if(material != null) {
@@ -29,12 +32,14 @@ public class DishSelect implements Select {
         List<Dish> nonSoupVegDish = new ArrayList();
 
         Set<Dish> dishes = new HashSet();
+        htmlGenerator.addHeadContent("Today Remaining materials");
+        htmlGenerator.addContent(todayMaterials.toString());
 
-        System.out.println("\nReccommand Dish based on today's material");
+        htmlGenerator.addHeadContent("Reccommand Dish based on today's material");
         for(Dish dish : data.getDishes()){
             int score = matchMaterialNum(dish);
             if(score > 0) {
-                System.out.println(">>>>Score :"+score +"; "+dish);
+                htmlGenerator.addContent("Score :"+score +"\t"+dish);
             }
 
             if(dish.isSoup()){

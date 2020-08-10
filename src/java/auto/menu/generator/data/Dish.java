@@ -14,7 +14,7 @@ public class Dish {
     }
 
     public Dish(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.materials = new HashSet();
     }
 
@@ -39,8 +39,12 @@ public class Dish {
         return name;
     }
 
-    public Set<Material> getMaterials() {
-        return materials;
+    public Set<String> getMaterialNames() {
+        Set<String> materialNames = new HashSet<String>();
+        for(Material material : materials){
+            materialNames.add(material.getName());
+        }
+        return materialNames;
     }
 
     public void setName(String name) {
